@@ -1,0 +1,64 @@
+{
+  "base": [
+    "compute.snapshots.setLabels",
+    "compute.disks.createSnapshot",
+    "compute.snapshots.create",
+    "compute.snapshots.delete",
+    "storage.buckets.getIamPolicy",
+    "storage.objects.get"
+  ],
+  "inaccount_extras": [
+    "compute.instances.create",
+    "compute.instances.delete",
+    "compute.instances.attachDisk",
+    "compute.instances.detachDisk",
+    "compute.instances.setDiskAutoDelete",
+    "compute.instances.setMetadata",
+    "compute.instances.stop",
+    "compute.networks.create",
+    "compute.networks.delete",
+    "compute.networks.updatePolicy",
+    "compute.subnetworks.create",
+    "compute.subnetworks.delete",
+    "compute.routers.create",
+    "compute.routers.update",
+    "compute.firewalls.create",
+    "compute.firewalls.delete",
+    "compute.disks.update",
+    "compute.disks.create",
+    "compute.disks.delete",
+    "compute.disks.setLabels",
+    "compute.disks.use",
+    "compute.subnetworks.use",
+    "compute.instances.setTags",
+    "compute.instances.setServiceAccount"
+  ],
+  "saas_extras": [
+    "compute.snapshots.setIamPolicy",
+    "compute.snapshots.useReadOnly"
+  ],
+  "scanner": [
+    "compute.instances.create",
+    "compute.instances.delete"
+  ],
+  "organization": [
+    "serviceusage.services.enable",
+    "servicemanagement.services.bind",
+    "resourcemanager.folders.list"
+  ],
+  "api_services": [
+    "compute.googleapis.com",
+    "storage-api.googleapis.com",
+    "cloudkms.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "dns.googleapis.com",
+    "storage-component.googleapis.com",
+    "iam.googleapis.com",
+    "container.googleapis.com",
+    "logging.googleapis.com",
+    "monitoring.googleapis.com",
+    "bigquery.googleapis.com",
+    "sqladmin.googleapis.com",
+    "cloudasset.googleapis.com"
+  ]
+}
