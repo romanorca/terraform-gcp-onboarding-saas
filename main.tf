@@ -18,35 +18,41 @@ resource "local_file" "orca" {
   filename = "${path.module}/service_account_key_orca.json"
 }
 
-
 resource "google_project_iam_custom_role" "orca-custom-role" {
   role_id      = "orcasecurity_sidescanner_role"
   title        = "Orca Security Side Scanner Role"
   permissions  = concat(local.gcp_permissions.base, local.gcp_permissions.saas_extras)
   project      = var.project_id
 }
-
-resource "google_project_iam_binding" "project-binding-1" {
+resource "google_project_iam_member" "project-membership-1" {
   project = var.project_id
   role    = "roles/viewer"
-  members = [
-    "serviceAccount:${google_service_account.orca.email}",
-  ]
+  member  =  "serviceAccount:${google_service_account.orca.email}"
 }
 
-resource "google_project_iam_binding" "project-binding-2" {
+resource "google_project_iam_member" "project-membership-2" {
+  project = var.project_id
+  role    = "roles/storage.objectViewer"
+  member  =  "serviceAccount:${google_service_account.orca.email}"
+}
+
+resource "google_project_iam_member" "project-membership-3" {
+  project = var.project_id
+  role    = "roles/iam.securityReviewer"
+  member  =  "serviceAccount:${google_service_account.orca.email}"
+}
+
+resource "google_project_iam_member" "project-membership-4" {
+  project = var.project_id
+  role    = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  member  =  "serviceAccount:service-${local.orca_production_project_number}@compute-system.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_binding" "project-binding-1" {
   project = var.project_id
   role    = "projects/${var.project_id}/roles/${google_project_iam_custom_role.orca-custom-role.role_id}"
   members = [
     "serviceAccount:${google_service_account.orca.email}",
-  ]
-}
-
-resource "google_project_iam_binding" "project-binding-3" {
-  project = var.project_id
-  role    = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-  members = [
-    "serviceAccount:service-${local.orca_production_project_number}@compute-system.iam.gserviceaccount.com",
   ]
 }
 
