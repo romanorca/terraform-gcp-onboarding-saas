@@ -19,7 +19,7 @@ resource "local_file" "orca" {
 }
 
 resource "google_project_iam_custom_role" "orca-custom-role" {
-  role_id      = "orcasecurity_sidescanner_role"
+  role_id      = "orca_security_side_scanner_role"
   title        = "Orca Security Side Scanner Role"
   permissions  = concat(local.gcp_permissions.base, local.gcp_permissions.saas_extras)
   project      = var.project_id
